@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const tasksController = require('./controllers/tasksController');
 
+const path = require("path")
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,7 +16,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));  
 app.use(methodOverride('_method'));  
 app.use(morgan('dev'));  
-app.use(express.static('public'));  
+app.use(express.static(path.join(__dirname, "public")));
 
 
 mongoose.connect(process.env.MONGODB_URI, {
