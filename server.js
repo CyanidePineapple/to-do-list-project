@@ -2,28 +2,39 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const path = require('path');
-const taskRoutes = require('./routes/tasks');
+const morgan = require('morgan');
+const tasksController = require('./controllers/tasksController');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URI);
-
-app.get('/', (req, res) => {
-  res.render('index');
-});
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));  
-app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-app.use('/tasks', taskRoutes);
 
-const PORT = process.env.PORT || 3000;
+app.use(express.urlencoded({ extended: true }));  
+app.use(methodOverride('_method'));  
+app.use(morgan('dev'));  
+app.use(express.static('public'));  
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch((err) => console.log('MongoDB connection error:', err));
+
+app.use('/tasks', tasksController);  
+
+app.get('/', (req, res) => {
+  res.redirect('/tasks');
 });
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
 
 
 
