@@ -1,4 +1,4 @@
-![To-Do List Logo](Images/To-Do-List-Logo-removebg-preview-1.png)
+![To-Do List Logo](Assets/To-Do-List-Logo-removebg-preview-1.png)
 
 # To Do List App
 Welcome to my To-Do List Project! Now introducing ads that...well add the feeling everybody loved in the 2000s of going to your favorite website and seeing they either got hacked or just really like money because geez where did all these ads come from! Most of them of course were either widely inappropriate, illegal or just weird.
