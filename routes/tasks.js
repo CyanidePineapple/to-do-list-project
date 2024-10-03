@@ -1,43 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('../models/task');
+const taskController = require('../controllers/taskController');
 
-router.get('/', async (req, res) => {
-  const tasks = await Task.find({});
-  res.render('tasks/index', { tasks });
-});
-
-router.get('/new', (req, res) => {
-  res.render('tasks/new');
-});
-
-router.post('/', async (req, res) => {
-  const { title, category } = req.body;
-  const newTask = new Task({
-    title,
-    category: { name: category }
-  });
-  await newTask.save();
-  res.redirect('/tasks');
-});
-
-router.get('/:id/edit', async (req, res) => {
-  const task = await Task.findById(req.params.id);
-  res.render('tasks/edit', { task });
-});
-
-router.put('/:id', async (req, res) => {
-  const { title, category } = req.body;
-  await Task.findByIdAndUpdate(req.params.id, {
-    title,
-    category: { name: category }
-  });
-  res.redirect('/tasks');
-});
-
-router.delete('/:id', async (req, res) => {
-  await Task.findByIdAndDelete(req.params.id);
-  res.redirect('/tasks');
-});
+router.get('/', taskController.getTasks);
+router.get('/new', taskController.renderNewTaskForm);
+router.post('/', taskController.createTask);
+router.get('/:id/edit', taskController.renderEditTaskForm);
+router.put('/:id', taskController.updateTask);
+router.delete('/:id', taskController.deleteTask);
 
 module.exports = router;

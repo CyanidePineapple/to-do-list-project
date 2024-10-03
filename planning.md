@@ -43,14 +43,31 @@ The secondary model used to organize the tasks.
 1. The user needs to be able to delete a task from the database.
 1. The user needs visual confirmation through the EJS to see the Addition, Subtraction or Update to a task.
 
-## Task Model
+
+
+## Task Model 
 ```js
 const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
+  description: { type: String },
   completed: { type: Boolean, default: false },
-  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }
+  category: categorySchema 
 });
+
 module.exports = mongoose.model('Task', taskSchema);
-Category Model
+
+```
+
+## Category Model
+
+```js
+const categorySchema = new mongoose.Schema({
+  name: { type: String, required: true }
+});
+
+```
+
+
+
 
 

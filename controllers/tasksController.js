@@ -7,8 +7,7 @@ router.get('/', async (req, res) => {
     const tasks = await Task.find();
     res.render('index', { tasks });
   } catch (err) {
-    console.log(err);
-    res.send('Error retrieving tasks');
+    res.status(500).send('Error retrieving tasks');
   }
 });
 
@@ -21,8 +20,7 @@ router.post('/', async (req, res) => {
     await Task.create(req.body);
     res.redirect('/tasks');
   } catch (err) {
-    console.log(err);
-    res.send('Error creating task');
+    res.status(500).send('Error creating task');
   }
 });
 
@@ -31,35 +29,26 @@ router.get('/:id/edit', async (req, res) => {
     const task = await Task.findById(req.params.id);
     res.render('edit', { task });
   } catch (err) {
-    console.log(err);
-    res.send('Error loading edit form');
+    res.status(500).send('Error loading edit form');
   }
 });
 
 router.put('/:id', async (req, res) => {
-    try {
-      if (!req.body.completed) {
-        req.body.completed = false;  
-      } else {
-        req.body.completed = true;  
-      }
-  
-      await Task.findByIdAndUpdate(req.params.id, req.body);
-      res.redirect('/tasks');
-    } catch (err) {
-      console.log(err);
-      res.send('Error updating task');
-    }
-  });
-  
+  try {
+    req.body.completed = req.body.completed ? true : false;
+    await Task.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect('/tasks');
+  } catch (err) {
+    res.status(500).send('Error updating task');
+  }
+});
 
 router.delete('/:id', async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
     res.redirect('/tasks');
   } catch (err) {
-    console.log(err);
-    res.send('Error deleting task');
+    res.status(500).send('Error deleting task');
   }
 });
 
