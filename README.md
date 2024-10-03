@@ -7,7 +7,11 @@ We hope to recreate that feeling while also providing the functionality of your 
 
 ## Getting Started
 
-Deployment Links Coming Soon!
+App: https://to-do-list-project-374c8fae2ad0.herokuapp.com/
+
+Repo:https://github.com/CyanidePineapple/to-do-list-project
+
+Planning: https://github.com/CyanidePineapple/to-do-list-project/blob/main/planning.md
 
 ## Attributions
 Many thanks to the good people at stack overflow/exchange who's names are literally too many to mention. Thanks for making a thread six years ago about my specific issue! Also thanks to ChatGPT and Notion for helping me organize my notes. As well as twitter/x for the developers that posted Node.Js and Express tips on the platform that helped me maximize my workflow. And of course can't forget MDN, MongoDB/Atlas Documentation and Javascript.info.
